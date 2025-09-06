@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PB Creations — Punam Borisa — Portfolio</title>
+  <meta name="description" content="PB Creations — Premium portfolio by Punam Borisa — Website Designer & Digital Marketer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-900: #031128;
+      --blue-700: #0b3b72;
+      --blue-500: #1e66b0;
+      --accent: #7c3aed;
+      --card: rgba(255,255,255,0.04);
+      --muted: rgba(255,255,255,0.75);
+      --glass: rgba(255,255,255,0.04);
+      --success: #22c55e;
+      --white: #eef2ff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,var(--blue-900),#05243a);color:var(--white);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* PRELOADER */
+    #preloader{position:fixed;inset:0;display:grid;place-items:center;background:var(--blue-900);z-index:9999}
+    .spinner{width:64px;height:64px;border-radius:50%;border:6px solid rgba(255,255,255,0.08);border-top-color:var(--blue-500);animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* NAV */
+    header{position:fixed;left:0;right:0;top:0;padding:14px 20px;z-index:900;backdrop-filter: blur(6px)}
+    .navwrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;letter-spacing:0.4px}
+    nav ul{display:flex;gap:14px;align-items:center;list-style:none}
+    nav a{padding:8px 10px;border-radius:8px;transition:all .15s}
+    nav a:hover{background:var(--card)}
+    .btn{background:linear-gradient(90deg,var(--blue-500),var(--blue-700));padding:8px 12px;border-radius:8px;color:white;font-weight:700}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+    /* MAIN LAYOUT */
+    .container{max-width:1100px;margin:0 auto;padding:100px 20px 60px}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:center;padding-top:20px}
+    .hero-left h1{font-size:clamp(28px,4vw,44px);line-height:1.02;margin-bottom:12px}
+    .hero-left p{color:rgba(255,255,255,0.85);margin-bottom:18px}
+    .cta-row{display:flex;gap:12px}
+
+    /* CARD & SECTIONS */
+    section{margin-top:48px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    /* ABOUT */
+    .about{display:flex;gap:22px;align-items:center}
+    .about img{width:220px;height:220px;border-radius:16px;object-fit:cover;border:4px solid rgba(255,255,255,0.03)}
+    .about .info p{color:rgba(255,255,255,0.85)}
+    .highlights{display:flex;gap:12px;margin-top:14px}
+    .chip{background:var(--card);padding:8px 10px;border-radius:999px;color:var(--white);font-weight:600}
+
+    /* SKILLS */
+    .skills .skill{margin-bottom:12px}
+    .skill .label{display:flex;justify-content:space-between;font-weight:600;margin-bottom:6px}
+    .bar{height:12px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#3b82f6);border-radius:999px;transition:width 1.2s ease}
+
+    /* SERVICES */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:12px}
+    .service{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+
+    /* PORTFOLIO */
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .filters button{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .project{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+    .project img{display:block;width:100%;height:180px;object-fit:cover}
+    .project .meta{position:absolute;inset:auto 0 0 0;padding:12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.6));}
+
+    /* TESTIMONIALS */
+    .slider{position:relative;overflow:hidden}
+    .slides{display:flex;gap:12px;transition:transform .5s ease}
+    .slide{min-width:100%;padding:16px}
+
+    /* CONTACT & FOOTER */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    form input, form textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--white)}
+    form button{margin-top:8px}
+
+    footer{margin-top:32px;padding:28px 20px;color:var(--muted);text-align:center}
+
+    /* BACK-TO-TOP */
+    #topBtn{position:fixed;right:18px;bottom:18px;padding:10px;border-radius:10px;background:var(--blue-700);display:none;z-index:900;color:var(--white);border:none}
+
+    /* RESPONSIVE */
+    @media(max-width:920px){.hero{grid-template-columns:1fr}.about{flex-direction:column}.contact-grid{grid-template-columns:1fr}.container{padding-top:80px}}
+
+    /* LIGHT MODE */
+    body.light{color:#0b1220;background:linear-gradient(180deg,#e6f0ff,#f7fbff)}
+    body.light .card{background:#fff;color:#0b1220}
+    body.light form input, body.light form textarea{background:#fff;color:#0b1220;border:1px solid rgba(11,18,32,0.06)}
+    body.light nav a{color:#0b1220}
+    body.light #topBtn{background:var(--blue-500);color:#fff}
+
+    small{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <!-- PRELOADER -->
+  <div id="preloader"><div class="spinner" aria-hidden="true"></div></div>
+
+  <!-- NAV -->
+  <header>
+    <div class="navwrap">
+      <div class="brand">PB Creations<span style="color:var(--accent)">.</span></div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button id="themeToggle" class="btn ghost">Dark/Light</button></li>
+          <li><a class="btn" id="downloadCV" href="#">Download CV</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-left">
+        <h1>Hi, I'm <span style="color:var(--blue-500)">Punam Borisa</span></h1>
+        <p>Founder of <strong>PB Creations</strong> — Website Designer · Digital Marketer · Tally ERP Support. I build premium, fast and responsive websites for small businesses.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn">Hire Me</a>
+          <a id="downloadCV2" href="#" class="btn ghost" style="color:var(--white);">Download CV</a>
+        </div>
+        <div style="margin-top:18px;color:rgba(255,255,255,0.85)">
+          <small>Specialties:</small>
+          <div class="highlights">
+            <span class="chip">Web Design</span>
+            <span class="chip">Digital Marketing</span>
+            <span class="chip">Tally ERP</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;color:rgba(255,255,255,0.85)"><small>Phone:</small> <div style="font-weight:700">6265724281</div></div>
+      </div>
+
+      <div class="card hero-right" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="C:\Users\HP\Downloads\punamborisa123.jpg" alt="punamborisa123" width"100" height="120" style="border-radius:10px;"/>
+            <strong>Punam Borisa</strong>
+            <div style="color:var(--muted);font-size:13px">Website Designer & Digital Marketer</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:space-between">
+          <div>
+            <small style="color:var(--muted)">Experience</small>
+            <div style="font-weight:700">2+ years</div>
+          </div>
+          <div>
+            <small style="color:var(--muted)">Projects</small>
+            <div style="font-weight:700">12</div>
+          </div>
+        </div>
+        <div style="margin-top:8px">
+          <small style="color:var(--muted)">Email</small>
+          <div style="font-weight:700">punamborisa18@gmail.com</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & SKILLS -->
+    <section id="about" class="card">
+      <div class="about">
+        
+          <img src="C:\Users\HP\Downloads\punamborisa123.jpg" alt="punamborisa123" width"130" height="150" style="border-radius:20px;"/>
+        <div class="info">
+          <h2>About Me</h2>
+          <p>I'm Punam Borisa — a dedicated website designer and digital marketer who helps small businesses and individuals build an online presence that converts. I turn ideas into beautiful, responsive websites and support them with practical digital marketing and Tally ERP skills.</p>
+
+          <div class="skills" style="margin-top:14px">
+            <div class="skill">
+              <div class="label"><span>HTML & CSS</span><small>88%</small></div>
+              <div class="bar"><i data-width="88%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="label"><span>JavaScript</span><small>75%</small></div>
+              <div class="bar"><i data-width="75%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="label"><span>Digital Marketing</span><small>80%</small></div>
+              <div class="bar"><i data-width="80%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="label"><span>Tally ERP Basics</span><small>70%</small></div>
+              <div class="bar"><i data-width="70%"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="card">
+      <h3>Services</h3>
+      <div class="services-grid">
+        <div class="service"><strong>Website Design</strong><p style="color:var(--muted);font-size:14px;margin-top:6px">UI/UX, responsive pages, portfolio & business websites.</p></div>
+        <div class="service"><strong>Frontend Development</strong><p style="color:var(--muted);font-size:14px;margin-top:6px">HTML, CSS, JavaScript — pixel-perfect code.</p></div>
+        <div class="service"><strong>Digital Marketing</strong><p style="color:var(--muted);font-size:14px;margin-top:6px">Social setup, landing pages, basic promotions.</p></div>
+        <div class="service"><strong>Tally ERP Support</strong><p style="color:var(--muted);font-size:14px;margin-top:6px">Bookkeeping help and Tally setup.</p></div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="card">
+      <h3>Portfolio</h3>
+      <div class="filters" aria-hidden="false">
+        <button data-filter="all">All</button>
+        <button data-filter="web">Web</button>
+        <button data-filter="marketing">Marketing</button>
+        <button data-filter="tally">Tally</button>
+      </div>
+      <div class="projects">
+        <div class="project" data-cat="web">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Website Project">
+          <div class="meta"><strong>Business Landing</strong><div style="color:var(--muted);font-size:13px">Web • Responsive landing with contact form</div></div>
+        </div>
+        <div class="project" data-cat="marketing">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Marketing Project">
+          <div class="meta"><strong>Local Campaign</strong><div style="color:var(--muted);font-size:13px">Marketing • Landing page + ad creatives</div></div>
+        </div>
+        <div class="project" data-cat="tally">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Tally Project">
+          <div class="meta"><strong>Tally Setup</strong><div style="color:var(--muted);font-size:13px">Tally • Accounts setup & basic reports</div></div>
+        </div>
+        <div class="project" data-cat="web">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Portfolio Project">
+          <div class="meta"><strong>Personal Portfolio</strong><div style="color:var(--muted);font-size:13px">Web • Portfolio design & deployment</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="card">
+      <h3>Testimonials</h3>
+      <div class="slider">
+        <div class="slides" id="slides">
+          <div class="slide card"><p>"Punam made our website quickly and it looks great. Very professional."</p><small style="color:var(--muted)">— Local Shop</small></div>
+          <div class="slide card"><p>"Helpful with digital promotion and replies fast."</p><small style="color:var(--muted)">— Client B</small></div>
+          <div class="slide card"><p>"Good knowledge of Tally and basic bookkeeping support."</p><small style="color:var(--muted)">— Client C</small></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px"><button id="prev">Prev</button><button id="next">Next</button></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card">
+      <h3>Contact</h3>
+      <div class="contact-grid">
+        <div>
+          <p style="color:var(--muted)">Send me a message and I'll reply ASAP.</p>
+          <form id="contactForm">
+            <input required name="name" placeholder="Your name" />
+            <input required name="email" type="email" placeholder="Your email" />
+            <textarea required name="message" rows="6" placeholder="Your message"></textarea>
+            <button class="btn" type="submit">Send Message</button>
+            <div id="formMsg" style="margin-top:8px;color:var(--muted)"></div>
+          </form>
+        </div>
+
+        <div>
+          <div style="height:220px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)"><!-- Khandwa Map Embed -->
+<div style="width:100%;height:220px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.1)">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.7251764318796!2d76.35009277544702!3d21.827735385596485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd3f08f4215e431%3A0xf6356f0c84d6f6b9!2sKhandwa%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1693912800000!5m2!1sen!2sin"
+    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+          </div>
+          <div style="margin-top:12px;color:var(--muted)">
+            <strong>Email</strong>
+            <div>punamborisa18@gmail.com</div>
+            <strong>Phone</strong>
+            <div>6265724281</div>
+            <small>Available for freelance & local projects</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Button</title>
+  <style>
+    .portfolio-button {
+      display: inline-block;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background-color: #007BFF; /* Blue color */
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .portfolio-button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+      transform: scale(1.05); /* Slight zoom effect */
+    }
+  </style>
+</head>
+<body>
+  <a href="https://zesty-quokka-67f95e.netlify.app/" target="_blank" class="portfolio-button">
+    full details
+  </a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div><strong>PB Creations</strong> • premium portfolio</div>
+        <div><small>&copy; <span id="year"></span> PB Creations — All rights reserved</small></div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- BACK TO TOP -->
+  <button id="topBtn" aria-label="Back to top">↑</button>
+
+  <!-- CHAT -->
+  <div id="chat" style="position:fixed;right:18px;bottom:90px;width:320px;max-width:calc(100% - 40px);border-radius:12px;background:rgba(2,6,23,0.8);padding:12px;display:none;box-shadow:0 10px 30px rgba(2,6,23,0.7);z-index:900">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong>Chat</strong><button id="closeChat">✕</button></div>
+    <div id="chatLog" style="height:140px;overflow:auto;background:transparent;padding:6px;border-radius:8px;color:var(--muted)">Hi! Ask me about my work — demo chat.</div>
+    <div style="display:flex;gap:8px;margin-top:8px"><input id="chatInput" placeholder="Type a message" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--white)" /><button id="sendChat" class="btn">Send</button></div>
+  </div>
+  <button id="openChat" title="Live chat" style="position:fixed;right:18px;bottom:18px;padding:12px;border-radius:12px;background:var(--blue-500);color:white;z-index:900">Chat</button>
+
+  <script>
+    // PRELOADER
+    window.addEventListener('load',()=>{ const pre=document.getElementById('preloader'); setTimeout(()=>pre.style.display='none',500); });
+
+    // THEME TOGGLE
+    const themeBtn=document.getElementById('themeToggle'); themeBtn.addEventListener('click',()=>{ document.body.classList.toggle('light'); localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark'); updateMode(); });
+    if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
+    function updateMode(){ if(document.body.classList.contains('light')){ themeBtn.textContent='Dark'; } else { themeBtn.textContent='Light'; } }
+    updateMode();
+
+    // SKILL BARS
+    const bars=document.querySelectorAll('.bar > i'); function animateBars(){ bars.forEach(b=>{ const w=b.getAttribute('data-width'); b.style.width=w; }); }
+    const aboutSection=document.getElementById('about'); const obs=new IntersectionObserver(entries=>{ if(entries[0].isIntersecting) { animateBars(); obs.disconnect(); } },{threshold:0.25}); obs.observe(aboutSection);
+
+    // FILTERS
+    document.querySelectorAll('.filters button').forEach(btn=>{ btn.addEventListener('click',()=>{ const f=btn.dataset.filter; document.querySelectorAll('.project').forEach(p=>{ p.style.display = (f==='all' || p.dataset.cat===f) ? 'block' : 'none'; }); }); });
+
+    // SLIDER
+    const slides=document.getElementById('slides'); const total=slides.children.length; let idx=0; document.getElementById('next').addEventListener('click',()=>{ idx=(idx+1)%total; updateSlider(); }); document.getElementById('prev').addEventListener('click',()=>{ idx=(idx-1+total)%total; updateSlider(); }); function updateSlider(){ slides.style.transform=`translateX(${-idx*100}%)`; }
+    setInterval(()=>{ idx=(idx+1)%total; updateSlider(); },6000);
+
+    // CONTACT FORM (demo)
+    document.getElementById('contactForm').addEventListener('submit',e=>{ e.preventDefault(); const fm=document.getElementById('formMsg'); fm.style.color='var(--muted)'; fm.textContent='Sending... (demo)'; setTimeout(()=>{ fm.style.color='var(--success)'; fm.textContent='Message sent! I will reply soon.'; e.target.reset(); },900); });
+
+    // CV DOWNLOAD
+    document.getElementById('downloadCV').addEventListener('click',e=>{ e.preventDefault(); fakeDownload(); }); document.getElementById('downloadCV2').addEventListener('click',e=>{ e.preventDefault(); fakeDownload(); });
+    function fakeDownload(){ const blob=new Blob([`CV - Punam Borisa
+Email: punamborisa18@gmail.com
+Phone: 6265724281
+Skills: Web Design, Digital Marketing, Tally ERP`],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Punam-Borisa-CV.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+
+    // BACK TO TOP
+    const topBtn=document.getElementById('topBtn'); window.addEventListener('scroll',()=>{ if(window.scrollY>300) topBtn.style.display='block'; else topBtn.style.display='none'; }); topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // CHAT
+    const openChat=document.getElementById('openChat'); const chat=document.getElementById('chat'); const closeChat=document.getElementById('closeChat'); openChat.addEventListener('click',()=>{ chat.style.display='block'; openChat.style.display='none'; }); closeChat.addEventListener('click',()=>{ chat.style.display='none'; openChat.style.display='block'; });
+    document.getElementById('sendChat').addEventListener('click',()=>{ const i=document.getElementById('chatInput'); if(!i.value) return; const log=document.getElementById('chatLog'); log.innerHTML += `<div style="margin-top:6px"><strong>You:</strong> ${escapeHtml(i.value)}</div>`; log.scrollTop = log.scrollHeight; i.value=''; setTimeout(()=>{ log.innerHTML += `<div style="margin-top:6px;color:var(--muted)"><strong>Bot:</strong> Thanks! I'll reply on email.</div>`; log.scrollTop = log.scrollHeight; },800); }); function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click',e=>{ const href=a.getAttribute('href'); if(href.length>1){ e.preventDefault(); document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'}); } }); });
+
+    document.getElementById('year').textContent=new Date().getFullYear();
+    openChat.addEventListener('keyup',e=>{ if(e.key==='Enter') openChat.click(); });
+
+  </script>
+
+
+
+<!-- ===== SOCIAL ICONS ANIMATION READY ===== -->
+<div id="socialIcons" style="position:fixed;right:20px;bottom:100px;display:flex;flex-direction:column;gap:14px;z-index:999;">
+
+  <!-- Instagram -->
+  <a href=https://www.instagram.com/website_developmet_punam?igsh=M2E3MmVrcWp2aHB0" style="display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:#E1306C;color:white;border-radius:50%;font-size:24px;text-decoration:none;transition:transform 0.3s, box-shadow 0.3s;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512" width="24" height="24"><path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54.25,54.25,0,0,0-30.61-30.61C283.74,124,224,124,224,124s-59.74,0-94.09,6.05a54.25,54.25,0,0,0-30.61,30.61C93,160.26,93,224,93,224s0,63.74,6.3,94.09a54.25,54.25,0,0,0,30.61,30.61C164.26,353,224,353,224,353s59.74,0,94.09-6.3a54.25,54.25,0,0,0,30.61-30.61C355,287.74,355,224,355,224S355,160.26,348.71,161.66ZM224,338a84,84,0,1,1,84-84A84.09,84.09,0,0,1,224,338Zm85.4-148.4a19.6,19.6,0,1,1-19.6-19.6A19.6,19.6,0,0,1,309.4,189.6Z"/></svg>
+  </a>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/916265724281" target="_blank" style="display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:#25D366;color:white;border-radius:50%;font-size:24px;text-decoration:none;transition:transform 0.3s, box-shadow 0.3s;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512" width="24" height="24"><path d="M380.9 97.1C339-3.3 231.4-22.6 150.1 48.1 65.6 121.2 60.7 237 122.2 296.3L75 421.5 201.6 372.2C260.3 409.8 347.3 408.2 401.3 349.7 451 295.8 451 179.3 380.9 97.1zM224 283.2c-31.4 0-56.8-25.5-56.8-56.8s25.5-56.8 56.8-56.8 56.8 25.5 56.8 56.8-25.4 56.8-56.8 56.8zm54.7-97.2c-6-3-11.1-8-14.1-14.1-3-6-4-12.9-3-19.4 1-6.5 3-12.5 7-17.6 4-5 9-9 14.9-11.9 5.9-2.9 12.5-4.6 19-4.7 6.5 0 12.9 1.7 18.6 5.3 5.7 3.5 10.8 8.4 14.7 14.3 3.9 5.9 6.6 12.8 7.5 19.8 0 7-.7 14.1-2.8 20.9-2.1 6.8-5.3 13.1-9.4 18.7-4.1 5.7-9 10.6-14.5 14.5-5.5 3.9-11.7 6.7-18.2 8.4-6.5 1.6-13.2 2.5-19.9 2.5-7 0-13.9-1-20.7-3.1z"/></svg>
+  </a>
+
+  <!-- Call -->
+  <a href="tel:+916265724281" style="display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:#0077B5;color:white;border-radius:50%;font-size:24px;text-decoration:none;transition:transform 0.3s, box-shadow 0.3s;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 512 512" width="24" height="24"><path d="M511.1 387.4c-1.2 6.6-6.8 11.7-13.5 12.8-36.4 6.7-144.1-55.2-201.5-112.7-57.4-57.4-119.4-165.1-112.7-201.5 1.1-6.7 6.2-12.3 12.8-13.5l64-11.3c7.5-1.3 15 2.5 18.8 9.3l44.2 63.6c3.6 5.1 4.2 11.6 1.5 17.2L227 269c21.7 30 53.5 61.8 83.5 83.5l29.5-62.1c2.7-5.7 8.1-9.8 14.2-11.2l63.5-16c6.6-1.7 13.5.7 18.4 6 4.9 5.3 6.9 12.8 5.4 19.8z"/></svg>
+  </a>
+</div>
+
+<!-- ===== ICON HOVER ANIMATION SCRIPT ===== -->
+<script>
+  const socialBtns = document.querySelectorAll('#socialIcons a');
+  socialBtns.forEach(btn=>{
+    btn.addEventListener('mouseenter',()=>{ btn.style.transform='scale(1.2)'; btn.style.boxShadow='0 4px 15px rgba(0,0,0,0.3)'; });
+    btn.addEventListener('mouseleave',()=>{ btn.style.transform='scale(1)'; btn.style.boxShadow='none'; });
+  });
+</script>
+
+</body>
+</html>
